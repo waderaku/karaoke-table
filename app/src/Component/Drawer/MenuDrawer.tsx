@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import { useSetRecoilState } from "recoil";
 import { selectedCategoryState } from "../../Domain/atoms";
+import { useResetFilterState } from "../../Domain/hooks/useResetFilterState";
 
 export const MenuDrawer = (props: {
   close: () => void;
@@ -23,8 +24,11 @@ export const MenuDrawer = (props: {
   const userName = localStorage.getItem("userName") || "名無し";
 
   const setSelectedCategory = useSetRecoilState(selectedCategoryState);
+  const resetFilter = useResetFilterState();
   const changeCategoryValue = (value: number) => () => {
     setSelectedCategory(value);
+    // カテゴリの変更が行われたらフィルタリングは消す
+    resetFilter();
   };
   return (
     <Box

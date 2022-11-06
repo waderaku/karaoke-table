@@ -117,9 +117,6 @@ export const LoveliveTable = () => {
         row.title.toLowerCase().includes(filterContainsTitle.toLowerCase())
     );
   }
-  //?key=[a,b]&key2=U&I
-  console.log(querySearchTitleMap);
-  console.log(querySearchTitleMap.length);
   if (querySearchTitleMap.length != 0) {
     filterTableData = filterTableData.filter((row) =>
       querySearchTitleMap.includes(row.title)

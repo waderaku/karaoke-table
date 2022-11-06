@@ -94,6 +94,15 @@ export const querySearchTitleMapState = atom<string[]>({
   default: [],
 });
 
+/**TODO クエリパラメータを使用するかどうかを判断するフラグ
+ * クエリパラメータが必要でない場合クエリパラメータを削除するような仕組みが必要だが、
+ * 画面遷移せずにそれを実現するためにはreact-router-domの導入が必要となるため、
+ * 一時的にフラグによる管理を行う
+ */
+export const useQuerySearchFlgState = atom<boolean>({
+  key: "useQuerySearchFlgSTate",
+  default: true,
+});
 /**
  * 何のカテゴリの曲かを示す
  * 1. μ`s
