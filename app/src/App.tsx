@@ -10,10 +10,12 @@ import { LoveliveTable } from "./Component/LoveliveTable/LoveliveTable";
 import { SearchArea } from "./Component/Search/SearchArea";
 import {
   isLoadingState,
+  querySearchTitleMapState,
   selectedCategoryState,
   tableData,
 } from "./Domain/atoms";
 import { fetchTableData } from "./Infrastructer/tableDataRepository";
+
 const style = {
   position: "fixed",
   inset: 0,
@@ -21,6 +23,22 @@ const style = {
 };
 
 const App = () => {
+  // query情報を取得し、格納
+  // queryに何か検索キーがあればそのタイトルだけでフィルタリング
+  const queryStr = window.location.search;
+  console.log(decodeURI("%26"));
+  const setQuerySeachTitleMap = useSetRecoilState(querySearchTitleMapState);
+  if (queryStr) {
+    const queryList = queryStr.split("&");
+    const querySearchMap = queryList.map((query) =>
+      decodeURIComponent(query.split("=")[1])
+    );
+    console.log(querySearchMap);
+    setQuerySeachTitleMap(querySearchMap);
+  }
+
+  // APIを叩いて全ての曲データを取得する
+  // 初期のみ挙動するようにしてAPIを叩く数を最小化
   const setTableData = useSetRecoilState(tableData);
   const selectedCategory = useRecoilValue(selectedCategoryState);
   useEffect(() => {
@@ -28,6 +46,8 @@ const App = () => {
       setTableData(data);
     });
   }, []);
+
+  // ラブライブのカテゴリの場合だけグループ毎の遷移ができる画像エリアを表示する
   const imageArea =
     selectedCategory <= 4 && selectedCategory > 0 ? <ImageArea /> : null;
   const isLoading = useRecoilValue(isLoadingState);

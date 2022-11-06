@@ -16,6 +16,7 @@ import {
   filterMaxScore,
   filterMinScore,
   filterResponsible,
+  querySearchTitleMapState,
   selectedCategoryState,
   selectedSong,
   selectedSongTitleState,
@@ -79,6 +80,7 @@ export const LoveliveTable = () => {
   const filterMinScoreValue = useRecoilValue(filterMinScore);
   const filterMaxScoreValue = useRecoilValue(filterMaxScore);
   const filterContainsTitle = useRecoilValue(filterContainsTitleState);
+  const querySearchTitleMap = useRecoilValue(querySearchTitleMapState);
   const selectedCategory = useRecoilValue(selectedCategoryState);
   const [tableDataValue, setTableData] = useRecoilState(tableData);
 
@@ -113,6 +115,14 @@ export const LoveliveTable = () => {
       (row) =>
         row.title &&
         row.title.toLowerCase().includes(filterContainsTitle.toLowerCase())
+    );
+  }
+  //?key=[a,b]&key2=U&I
+  console.log(querySearchTitleMap);
+  console.log(querySearchTitleMap.length);
+  if (querySearchTitleMap.length != 0) {
+    filterTableData = filterTableData.filter((row) =>
+      querySearchTitleMap.includes(row.title)
     );
   }
 

@@ -89,6 +89,11 @@ export const filterContainsTitleState = atom<string | null>({
   default: null,
 });
 
+export const querySearchTitleMapState = atom<string[]>({
+  key: "querySearchTitleMapState",
+  default: [],
+});
+
 /**
  * 何のカテゴリの曲かを示す
  * 1. μ`s
@@ -101,7 +106,7 @@ export const filterContainsTitleState = atom<string | null>({
  */
 export const selectedCategoryState = atom<number>({
   key: "selectedCategoryState",
-  default: 1,
+  default: 0,
 });
 
 export const backGroundImageState = selector<string>({
