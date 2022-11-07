@@ -10,7 +10,7 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import * as React from "react";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import {
   filterContainsTitleState,
   filterMaxScore,
@@ -21,6 +21,7 @@ import {
   selectedSong,
   selectedSongTitleState,
   tableData,
+  useQuerySearchFlgState,
 } from "../../Domain/atoms";
 import { AddSongModal } from "./AddSongModal/AddSongModal";
 const style = {
@@ -81,8 +82,9 @@ export const LoveliveTable = () => {
   const filterMaxScoreValue = useRecoilValue(filterMaxScore);
   const filterContainsTitle = useRecoilValue(filterContainsTitleState);
   const querySearchTitleMap = useRecoilValue(querySearchTitleMapState);
+  const useQuerySearchFlg = useRecoilValue(useQuerySearchFlgState);
   const selectedCategory = useRecoilValue(selectedCategoryState);
-  const [tableDataValue, setTableData] = useRecoilState(tableData);
+  const tableDataValue = useRecoilValue(tableData);
 
   let filterTableData = tableDataValue;
 
@@ -117,7 +119,7 @@ export const LoveliveTable = () => {
         row.title.toLowerCase().includes(filterContainsTitle.toLowerCase())
     );
   }
-  if (querySearchTitleMap.length != 0) {
+  if (querySearchTitleMap.length != 0 && useQuerySearchFlg) {
     filterTableData = filterTableData.filter((row) =>
       querySearchTitleMap.includes(row.title)
     );

@@ -13,7 +13,6 @@ import {
   querySearchTitleMapState,
   selectedCategoryState,
   tableData,
-  useQuerySearchFlgState,
 } from "./Domain/atoms";
 import { fetchTableData } from "./Infrastructer/tableDataRepository";
 
@@ -28,8 +27,7 @@ const App = () => {
   // queryに何か検索キーがあればそのタイトルだけでフィルタリング
   const queryStr = window.location.search;
   const setQuerySeachTitleMap = useSetRecoilState(querySearchTitleMapState);
-  const useQuerySearchFlg = useRecoilValue(useQuerySearchFlgState);
-  if (queryStr && useQuerySearchFlg) {
+  if (queryStr) {
     const queryList = queryStr.split("&");
     const querySearchMap = queryList.map((query) =>
       decodeURIComponent(query.split("=")[1])
