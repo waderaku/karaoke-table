@@ -105,6 +105,7 @@ export const useQuerySearchFlgState = atom<boolean>({
 });
 /**
  * 何のカテゴリの曲かを示す
+ * 0. all
  * 1. μ`s
  * 2. Aqours
  * 3. 虹が先
@@ -112,6 +113,7 @@ export const useQuerySearchFlgState = atom<boolean>({
  * 5. けいおん！
  * 6. 物語シリーズ
  * 7. 推し曲
+ * 99. サマリ
  */
 export const selectedCategoryState = atom<number>({
   key: "selectedCategoryState",

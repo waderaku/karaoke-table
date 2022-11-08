@@ -115,7 +115,7 @@ export const MenuDrawer = (props: {
           </ListItemButton>
         </ListItem>
         <ListItem key={"サマリー"} disablePadding>
-          <ListItemButton>
+          <ListItemButton onClick={changeCategoryValue(99)}>
             <ListItemIcon>
               <InboxIcon />
             </ListItemIcon>

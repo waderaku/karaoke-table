@@ -8,6 +8,7 @@ import { Header } from "./Component/Header";
 import { ImageArea } from "./Component/ImageArea/ImageArea";
 import { LoveliveTable } from "./Component/LoveliveTable/LoveliveTable";
 import { SearchArea } from "./Component/Search/SearchArea";
+import { Summary } from "./Component/Summary/Summary";
 import {
   isLoadingState,
   querySearchTitleMapState,
@@ -49,28 +50,21 @@ const App = () => {
   const imageArea =
     selectedCategory <= 4 && selectedCategory > 0 ? <ImageArea /> : null;
   const isLoading = useRecoilValue(isLoadingState);
+
+  // カテゴリがsummaryを指していた場合のみ、サマリ用のコンポーネントを表示し、
+  // それ以外の場合はデータテーブルを表示する
+  const mainArea = selectedCategory == 99 ? <Summary /> : <LoveliveTable />;
+
   return (
     <ThemeProvider theme={theme(selectedCategory)}>
       <CssBaseline />
       <div className="App">
-        {/* <BackgroundImage /> */}
-        <div
-        // style={{
-        //   position: "absolute",
-        //   margin: "auto",
-        //   top: 0,
-        //   bottom: 0,
-        // }}
-        >
+        <div>
           <Header />
           {imageArea}
-          {/* <div style={{ backgroundColor: "white", opacity: 0.9 }}> */}
           <div>
-            <SearchArea />
-            <Grid>
-              {/* <DataGridTable></DataGridTable> */}
-              <LoveliveTable />
-            </Grid>
+            {selectedCategory !== 99 && <SearchArea />}
+            <Grid>{mainArea}</Grid>
           </div>
         </div>
       </div>
