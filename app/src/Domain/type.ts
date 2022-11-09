@@ -40,38 +40,35 @@ export type CharacterList = {
   characterList: string[];
 };
 
-
-
-
 //////////////////ここから実装/////////////////////////
 
-export type User = "稗田" | "泉" | "水原" 
+export type User = "稗田" | "泉" | "水原";
 
-export type ScoreImage= {
-  imageUrl: string,
-  uploadUser: User
-  comment: string
-}
+export type ScoreImage = {
+  imageUrl: string;
+  uploadUser: User;
+  comment: string;
+};
 export type TableRaw = {
   score: number | null;
   responsible: string | null;
   title: string;
   artist: string;
   category: number;
-  scoreImageHistory: ScoreImage[]
-}
+  scoreImageHistory: ScoreImage[];
+};
 export type Song = {
   score: string;
   responsible: string;
   title: string;
   artist: string;
   category: string;
-  scoreImageHistory: ScoreImage[]
-}
+  scoreImageHistory: ScoreImage[];
+};
 
 export type UploadScoreImage = {
   title: string;
   imageBase64: string;
   uploadUser: string;
-  comment: string
-}
+  comment: string;
+};
