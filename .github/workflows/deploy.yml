@@ -17,9 +17,6 @@ jobs:
         
       - name: Install Dependencies
         run: npm install
-    
-      - name: Update Env
-        run: export CI=false
       
       - name: Build
         run: npm run build  # React ビルド
