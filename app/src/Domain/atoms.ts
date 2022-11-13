@@ -1,68 +1,10 @@
-import { atom, atomFamily, selector } from "recoil";
-import {
-  BackHeaderProp,
-  CharacterId,
-  CharacterList,
-  DrawerValue,
-  FooterValue,
-  Quiz,
-  QuizScore,
-  ScoreImage,
-  Song,
-  TableRaw,
-} from "./type";
-
-export const targetCharacterState = atom<CharacterId>({
-  key: "targetCharacterState",
-  default: "",
-});
-
-export const quizScoreState = atom<QuizScore>({
-  key: "quizScoreState",
-  default: {
-    score: -1,
-    fullScore: -1,
-  },
-});
-
-export const footerValueState = atom<FooterValue>({
-  key: "footerValueState",
-  default: FooterValue.ANIMATION,
-});
+import { atom, selector } from "recoil";
+import { DrawerValue, ScoreImage, Song, TableRaw } from "./type";
 
 export const drawerValueState = atom<DrawerValue>({
   key: "quizListState",
   default: DrawerValue.TEST,
 });
-
-export const quizListState = atomFamily<Quiz[], CharacterId>({
-  key: "quizListState",
-  default: [],
-});
-
-export const headerViewFlgState = atom<boolean>({
-  key: "headerViewFlgState",
-  default: true,
-});
-export const backHeaderPropState = atom<BackHeaderProp>({
-  key: "backHeaderPropState",
-  default: {
-    backList: [],
-    textList: [],
-  },
-});
-
-export const characterListState = atom<CharacterList[]>({
-  key: "characterListState",
-  default: [
-    {
-      category: "",
-      characterList: [],
-    },
-  ],
-});
-
-//////////////////ここから実装/////////////////////////
 
 export const tableData = atom<TableRaw[]>({
   key: "tableDataState",

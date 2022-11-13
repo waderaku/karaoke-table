@@ -12,7 +12,6 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { useResetState } from "../Domain/hooks/useResetState";
 import { MenuDrawer } from "./Drawer/MenuDrawer";
 
 const style = {
@@ -53,7 +52,6 @@ export const Header = () => {
     localStorage.setItem("userName", name);
   };
 
-  const resetState = useResetState();
   //   const style = {
   //     position: "absolute",
   //     width: "100%",
@@ -78,12 +76,7 @@ export const Header = () => {
               </IconButton>
             </Grid>
             <Grid item xs={10.5}>
-              <Typography
-                onClick={resetState}
-                variant="h5"
-                component="div"
-                sx={{ flexGrow: 1 }}
-              >
+              <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
                 カラオケスコア
               </Typography>
             </Grid>
