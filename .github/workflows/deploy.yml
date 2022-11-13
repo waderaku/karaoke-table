@@ -10,14 +10,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@main  # リポジトリをチェックアウト
         
-      - name: Move frontend-project
-        run: cd app
-
       - name: Install Dependencies
         run: npm install
+        working-directory: ./app
 
       - name: Build
         run: npm run build  # React ビルド
+        working-directory: ./app
 
       - name: Deploy  # S3にデプロイ 
         env:
@@ -25,3 +24,4 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run:
           aws s3 cp --recursive --region ap-northeast-1 build s3://${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        working-directory: ./app
