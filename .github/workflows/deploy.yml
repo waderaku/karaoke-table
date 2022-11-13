@@ -37,11 +37,11 @@ jobs:
             -H 'Content-Type: application/json' \
             -H 'Authorization: ${{ secrets.LINE_AUTH_KEY }}' \
             -d '{
-                "to": ${{ secrets.LINE_SEND_ID }},
+                "to": "${{ secrets.LINE_SEND_ID }}",
                 "messages":[
                     {
                         "type":"text",
-                        "text":"機能が追加されたみたい！\n\n「${{ github.event.head_commit.message }}」\n\n確認してみてね！"
+                        "text":"機能が追加されたみたい！\n\n「${{ github.event.head_commit.message }}」ってメッセージが届いてる！\n\n確認してみてね！"
                     }
                 ]
             }'
