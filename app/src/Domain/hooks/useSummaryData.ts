@@ -1,4 +1,5 @@
 import { useRecoilValue } from "recoil";
+import { CLEAR_MIN_SCORE } from "../../constant";
 import { tableData } from "../atoms";
 const range = (start: number, end: number) =>
   Array.from(Array(end - start + 1).keys()).map(
@@ -20,6 +21,7 @@ export const useSummaryData = () => {
   // サマリデータの初期化
   // keyに点数、valueに各メンバーがその点数を取得している曲の一覧が格納される
   let summaryData: { [key: number]: string[][] } = {};
+  let mainSummaryData: { [key: string]: number } = { 稗田: 0, 水原: 0, 泉: 0 };
   for (let score of range(minScore, maxScore)) {
     summaryData[score] = [[], [], []];
   }
@@ -34,7 +36,11 @@ export const useSummaryData = () => {
       if (tableRaw.responsible == "泉") {
         summaryData[tableRaw.score][2].push(tableRaw.title);
       }
+
+      if (tableRaw.score >= CLEAR_MIN_SCORE && tableRaw.responsible) {
+        mainSummaryData[tableRaw.responsible]++;
+      }
     }
   });
-  return summaryData;
+  return { summaryData, mainSummaryData };
 };
