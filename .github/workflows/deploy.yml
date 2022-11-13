@@ -40,7 +40,7 @@ jobs:
             -H 'Content-Type: application/json' \
             -H 'Authorization: Bearer $LINE_AUTH_KEY' \
             -d '{
-                "to": "$LINE_SEND_ID",
+                "to": $LINE_SEND_ID,
                 "messages":[
                     {
                         "type":"text",
