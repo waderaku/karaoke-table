@@ -1,0 +1,47 @@
+name: Build React on S3
+on:
+  push:
+      branches:
+        - main
+
+defaults:
+  run:
+    working-directory: ./app
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main  # リポジトリをチェックアウト
+        
+      - name: Install Dependencies
+        run: npm install
+      
+      - name: Build
+        run: npm run build  # React ビルド
+        env:
+          CI: false
+        
+      - name: Deploy  # S3にデプロイ 
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
+          S3_UPLOAD_BUCKET: ${{ secrets.S3_UPLOAD_BUCKET }}
+        run: |
+          aws s3 cp --recursive --region ap-northeast-1 build s3://$S3_UPLOAD_BUCKET
+
+      - name: Send Message # Lineグループにメッセージを送る
+        run: |
+          curl -v -X POST https://api.line.me/v2/bot/message/push \
+            -H 'Content-Type: application/json' \
+            -H 'Authorization: ${{ secrets.LINE_AUTH_KEY }}' \
+            -d '{
+                "to": "${{ secrets.LINE_SEND_ID }}",
+                "messages":[
+                    {
+                        "type":"text",
+                        "text":"機能が追加されたみたい！\n\n「${{ github.event.head_commit.message }}」ってメッセージが届いてる！\n\n確認してみてね！"
+                    }
+                ]
+            }'
