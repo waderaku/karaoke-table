@@ -10,6 +10,7 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import * as React from "react";
+import { useEffect } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import {
   filterContainsTitleState,
@@ -86,6 +87,18 @@ export const LoveliveTable = () => {
   const selectedCategory = useRecoilValue(selectedCategoryState);
   const tableDataValue = useRecoilValue(tableData);
 
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  useEffect(() => {
+    setPage(0);
+  }, [
+    filterResponsibleValue,
+    filterMinScoreValue,
+    filterMaxScoreValue,
+    filterContainsTitle,
+    selectedCategory,
+  ]);
+
   let filterTableData = tableDataValue;
 
   if (selectedCategory !== 0) {
@@ -124,9 +137,6 @@ export const LoveliveTable = () => {
       querySearchTitleMap.includes(row.title)
     );
   }
-
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
