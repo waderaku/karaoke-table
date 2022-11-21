@@ -36,7 +36,7 @@ export const Header = () => {
 
   // ユーザ名関係
   let userName = "名無し";
-  if (process.browser && localStorage.getItem("userName")) {
+  if (typeof window !== "undefined" && localStorage.getItem("userName")) {
     userName = localStorage.getItem("userName") || "名無し";
   }
   const [name, setName] = useState(userName);

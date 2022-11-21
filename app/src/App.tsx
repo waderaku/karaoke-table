@@ -21,11 +21,11 @@ const style = {
 };
 
 export const App = () => {
-  if (process.browser) {
+  const setQuerySeachTitleMap = useSetRecoilState(querySearchTitleMapState);
+  if (typeof window !== "undefined") {
     // query情報を取得し、格納
     // queryに何か検索キーがあればそのタイトルだけでフィルタリング
     const queryStr = window.location.search;
-    const setQuerySeachTitleMap = useSetRecoilState(querySearchTitleMapState);
     if (queryStr) {
       const queryList = queryStr.split("&");
       const querySearchMap = queryList.map((query) =>
