@@ -35,7 +35,10 @@ export const Header = () => {
   const openDrawer = () => setDrawerState(true);
 
   // ユーザ名関係
-  const userName = localStorage.getItem("userName") || "名無し";
+  let userName = "名無し";
+  if (process.browser && localStorage.getItem("userName")) {
+    userName = localStorage.getItem("userName") || "名無し";
+  }
   const [name, setName] = useState(userName);
   const handleChange = (event: any) => {
     setName(event.target.value);
