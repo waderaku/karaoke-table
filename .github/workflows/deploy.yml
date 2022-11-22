@@ -31,17 +31,17 @@ jobs:
       #   run: |
       #     aws s3 cp --recursive --region ap-northeast-1 build s3://$S3_UPLOAD_BUCKET
 
-      - name: Send Message # Lineグループにメッセージを送る
-        run: |
-          curl -v -X POST https://api.line.me/v2/bot/message/push \
-            -H 'Content-Type: application/json' \
-            -H 'Authorization: ${{ secrets.LINE_AUTH_KEY }}' \
-            -d '{
-                "to": "${{ secrets.LINE_SEND_ID }}",
-                "messages":[
-                    {
-                        "type":"text",
-                        "text":"機能が追加されたみたい！\n\n「${{ github.event.head_commit.message }}」ってメッセージが届いてる！\n\n確認してみてね！"
-                    }
-                ]
-            }'
+      # - name: Send Message # Lineグループにメッセージを送る
+      #   run: |
+      #     curl -v -X POST https://api.line.me/v2/bot/message/push \
+      #       -H 'Content-Type: application/json' \
+      #       -H 'Authorization: ${{ secrets.LINE_AUTH_KEY }}' \
+      #       -d '{
+      #           "to": "${{ secrets.LINE_SEND_ID }}",
+      #           "messages":[
+      #               {
+      #                   "type":"text",
+      #                   "text":"機能が追加されたみたい！\n\n「${{ github.event.head_commit.message }}」ってメッセージが届いてる！\n\n確認してみてね！"
+      #               }
+      #           ]
+      #       }'
