@@ -10,9 +10,8 @@ import { useSetRecoilState } from "recoil";
 import {
   filterMaxScore,
   filterMinScore,
-  querySearchTitleMapState,
+  filterResponsible,
   selectedCategoryState,
-  useQuerySearchFlgState,
 } from "../../../Domain/atoms";
 interface Column {
   id: string;
@@ -23,7 +22,6 @@ interface Column {
 }
 
 const columns: readonly Column[] = [
-  //   { id: "score", label: "点数", minWidth: 30 },
   { id: "稗田", label: "稗田", minWidth: 30 },
   { id: "水原", label: "水原", minWidth: 30 },
   {
@@ -58,10 +56,7 @@ export const SummaryTable = (props: {
   const summaryData = props.summaryData;
   let tableBodyList: JSX.Element[] = [];
 
-  const setQuerySearchTitleMapState = useSetRecoilState(
-    querySearchTitleMapState
-  );
-  const setUseQuerySearchFlgState = useSetRecoilState(useQuerySearchFlgState);
+  const setFilterResponsible = useSetRecoilState(filterResponsible);
   const setCategory = useSetRecoilState(selectedCategoryState);
   const setFilterMinScore = useSetRecoilState(filterMinScore);
   const setFilterMaxScore = useSetRecoilState(filterMaxScore);
@@ -92,8 +87,9 @@ export const SummaryTable = (props: {
                     underline="none"
                     onClick={() => {
                       // サマリの曲数が押されたら、対象の曲だけに絞って表示する
-                      setQuerySearchTitleMapState(row[index]);
-                      setUseQuerySearchFlgState(true);
+                      setFilterMinScore(Number(value));
+                      setFilterMaxScore(Number(value));
+                      setFilterResponsible(column.id);
                       setCategory(0);
                     }}
                   >
