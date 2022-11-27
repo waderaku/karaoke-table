@@ -13,7 +13,7 @@ export const SearchTitle = () => {
   ) => {
     setFilterContainsTitle(event.target.value);
   };
-
+  console.log(filterContainsTitle);
   return (
     <Grid container alignItems="flex-end">
       <Grid item xs={4}>
@@ -24,7 +24,7 @@ export const SearchTitle = () => {
           id="standard-basic"
           label="タイトル"
           variant="standard"
-          value={filterContainsTitle}
+          value={filterContainsTitle ? filterContainsTitle : ""}
           onChange={(event) => changeSearchedHandler(event)}
         />
       </Grid>
