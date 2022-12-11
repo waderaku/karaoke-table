@@ -131,7 +131,7 @@ export const AddSongModal = (props: { song: Song; closeModal: () => void }) => {
                 >
                   <MenuItem value={"1"}>μ's</MenuItem>
                   <MenuItem value={"2"}>Aqours</MenuItem>
-                  <MenuItem value={"3"}>虹が先</MenuItem>
+                  <MenuItem value={"3"}>虹ヶ先</MenuItem>
                   <MenuItem value={"4"}>Liella!</MenuItem>
                   <MenuItem value={"5"}>けいおん！</MenuItem>
                   <MenuItem value={"6"}>物語シリーズ</MenuItem>

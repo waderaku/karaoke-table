@@ -50,7 +50,7 @@ export const useQuerySearchFlgState = atom<boolean>({
  * 0. all
  * 1. μ`s
  * 2. Aqours
- * 3. 虹が先
+ * 3. 虹ヶ先
  * 4. Liella!
  * 5. けいおん！
  * 6. 物語シリーズ
